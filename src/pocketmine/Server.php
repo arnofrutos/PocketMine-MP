@@ -1934,7 +1934,7 @@ class Server{
 				$forceSync = true;
 			}
 
-			$promise = new CompressBatchPromise();
+			$promise = new CompressBatchPromise($stream->earliestTime);
 			if(!$forceSync and $this->networkCompressionAsync){
 				$task = new CompressBatchTask($stream, $compressionLevel, $promise);
 				$this->asyncPool->submitTask($task);

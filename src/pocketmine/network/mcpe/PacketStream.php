@@ -27,10 +27,15 @@ use pocketmine\network\mcpe\protocol\DataPacket;
 use pocketmine\network\mcpe\protocol\PacketPool;
 
 class PacketStream extends NetworkBinaryStream{
+	/** @var float */
+	public $earliestTime = PHP_FLOAT_MAX;
 
 	public function putPacket(DataPacket $packet) : void{
 		if(!$packet->isEncoded){
 			$packet->encode();
+		}
+		if($packet->creationTime < $this->earliestTime){
+			$this->earliestTime = $packet->creationTime;
 		}
 		$this->putString($packet->buffer);
 	}

@@ -41,6 +41,18 @@ abstract class DataPacket extends NetworkBinaryStream{
 	/** @var int */
 	public $recipientSubId = 0;
 
+	/** @var float */
+	public $creationTime;
+
+	public function __construct(string $buffer = "", int $offset = 0){
+		$this->creationTime = microtime(true);
+		parent::__construct($buffer, $offset);
+	}
+
+	public function __clone(){
+		$this->creationTime = microtime(true);
+	}
+
 	public function pid() : int{
 		return $this::NETWORK_ID;
 	}

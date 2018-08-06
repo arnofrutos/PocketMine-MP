@@ -30,6 +30,16 @@ class CompressBatchPromise{
 	/** @var string|null */
 	private $result = null;
 
+	/** @var float */
+	public $earliestTime;
+
+	/**
+	 * @param float|null $earliestTime
+	 */
+	public function __construct(?float $earliestTime = null){
+		$this->earliestTime = $earliestTime ?? null;
+	}
+
 	public function onResolve(callable $callback) : void{
 		if($this->result !== null){
 			$callback($this);

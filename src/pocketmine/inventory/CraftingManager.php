@@ -106,7 +106,7 @@ class CraftingManager{
 		$batch = new PacketStream();
 		$batch->putPacket($pk);
 
-		$this->craftingDataCache = new CompressBatchPromise();
+		$this->craftingDataCache = new CompressBatchPromise($batch->earliestTime);
 		$this->craftingDataCache->resolve(NetworkCompression::compress($batch->buffer));
 
 		Timings::$craftingDataCacheRebuildTimer->stopTiming();
