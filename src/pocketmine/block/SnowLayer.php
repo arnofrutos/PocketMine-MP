@@ -23,6 +23,7 @@ declare(strict_types=1);
 
 namespace pocketmine\block;
 
+use pocketmine\event\block\SnowMeltEvent;
 use pocketmine\item\Item;
 use pocketmine\item\ItemFactory;
 use pocketmine\item\TieredTool;
@@ -79,9 +80,14 @@ class SnowLayer extends Flowable{
 	}
 
 	public function onRandomTick() : void{
-		if($this->level->getBlockLightAt($this->x, $this->y, $this->z) >= 12){
-			$this->getLevel()->setBlock($this, BlockFactory::get(Block::AIR), false, false);
-		}
+        $this->getLevel()->getServer()->getPluginManager()->callEvent($ev = new SnowMeltEvent($this));
+
+            if($this->level->getBlockLightAt($this->x, $this->y, $this->z) >= 12){
+                $this->getLevel()->getServer()->getPluginManager()->callEvent($ev = new SnowMeltEvent($this));
+                if (!$ev->isCancelled()) {
+                    $this->getLevel()->setBlock($this, BlockFactory::get(Block::AIR), false, false);
+                }
+            }
 	}
 
 	public function getDropsForCompatibleTool(Item $item) : array{

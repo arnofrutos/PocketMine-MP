@@ -23,6 +23,7 @@ declare(strict_types=1);
 
 namespace pocketmine\block;
 
+use pocketmine\event\block\IceMeltEvent;
 use pocketmine\item\enchantment\Enchantment;
 use pocketmine\item\Item;
 use pocketmine\Player;
@@ -67,9 +68,12 @@ class Ice extends Transparent{
 	}
 
 	public function onRandomTick() : void{
-		if($this->level->getHighestAdjacentBlockLight($this->x, $this->y, $this->z) >= 12){
-			$this->level->useBreakOn($this);
-		}
+            if ($this->level->getHighestAdjacentBlockLight($this->x, $this->y, $this->z) >= 12) {
+                $this->getLevel()->getServer()->getPluginManager()->callEvent($ev = new IceMeltEvent($this));
+                if (!$ev->isCancelled()) {
+                    $this->level->useBreakOn($this);
+                }
+            }
 	}
 
 	public function getDropsForCompatibleTool(Item $item) : array{
