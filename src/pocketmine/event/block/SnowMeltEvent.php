@@ -21,21 +21,13 @@
 
 declare(strict_types=1);
 
-namespace pocketmine\block;
+namespace pocketmine\event\block;
 
-class RedstoneTorchUnlit extends RedstoneTorch {
+use pocketmine\event\Cancellable;
 
-	protected $id = self::UNLIT_REDSTONE_TORCH;
+/**
+ * Called when leaves decay due to not being attached to wood.
+ */
+class SnowMeltEvent extends BlockEvent implements Cancellable{
 
-	public function getName() : string{
-		return "Unlit Redstone Torch";
-	}
-
-	public function getLightLevel() : int{
-		return 0;
-	}
-
-	public function isActivated(Block $from = null){
-	    return false;
-    }
 }

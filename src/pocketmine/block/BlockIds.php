@@ -100,8 +100,8 @@ interface BlockIds{
 	public const WOODEN_PRESSURE_PLATE = 72;
 	public const REDSTONE_ORE = 73;
 	public const GLOWING_REDSTONE_ORE = 74, LIT_REDSTONE_ORE = 74;
-	public const UNLIT_REDSTONE_TORCH = 75;
-	public const LIT_REDSTONE_TORCH = 76, REDSTONE_TORCH = 76;
+	public const UNLIT_REDSTONE_TORCH = 75; public const REDSTONE_TORCH_OFF = 75;
+	public const LIT_REDSTONE_TORCH = 76, REDSTONE_TORCH = 76, REDSTONE_TORCH_ON = 76;
 	public const STONE_BUTTON = 77;
 	public const SNOW_LAYER = 78;
 	public const ICE = 79;
@@ -118,8 +118,8 @@ interface BlockIds{
 	public const PORTAL = 90;
 	public const JACK_O_LANTERN = 91, LIT_PUMPKIN = 91;
 	public const CAKE_BLOCK = 92;
-	public const REPEATER_BLOCK = 93, UNPOWERED_REPEATER = 93;
-	public const POWERED_REPEATER = 94;
+	public const REPEATER_BLOCK = 93, UNPOWERED_REPEATER = 93, UNPOWERED_REPEATER_BLOCK = 93;
+	public const POWERED_REPEATER = 94, POWERED_REPEATER_BLOCK = 94;
 	public const INVISIBLEBEDROCK = 95, INVISIBLE_BEDROCK = 95;
 	public const TRAPDOOR = 96, WOODEN_TRAPDOOR = 96;
 	public const MONSTER_EGG = 97;
@@ -148,8 +148,8 @@ interface BlockIds{
 	public const END_PORTAL_FRAME = 120;
 	public const END_STONE = 121;
 	public const DRAGON_EGG = 122;
-	public const REDSTONE_LAMP = 123;
-	public const LIT_REDSTONE_LAMP = 124;
+	public const REDSTONE_LAMP = 123, INACTIVE_REDSTONE_LAMP = 124;
+	public const LIT_REDSTONE_LAMP = 124, ACTIVE_REDSTONE_LAMP = 124;
 	public const DROPPER = 125;
 	public const ACTIVATOR_RAIL = 126;
 	public const COCOA = 127, COCOA_BLOCK = 127;
@@ -164,7 +164,7 @@ interface BlockIds{
 	public const JUNGLE_STAIRS = 136;
 	public const COMMAND_BLOCK = 137;
 	public const BEACON = 138;
-	public const COBBLESTONE_WALL = 139, STONE_WALL = 139;
+	public const COBBLESTONE_WALL = 139, STONE_WALL = 139, COBBLE_WALL = 139;
 	public const FLOWER_POT_BLOCK = 140;
 	public const CARROTS = 141, CARROT_BLOCK = 141;
 	public const POTATOES = 142, POTATO_BLOCK = 142;

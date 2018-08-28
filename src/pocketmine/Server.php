@@ -293,6 +293,8 @@ class Server{
 	/** @var Level */
 	private $levelDefault = null;
 
+    public $redstoneEnabled = true;
+
 	/**
 	 * @return string
 	 */

@@ -678,4 +678,8 @@ class PluginManager{
 		}
 		return $list;
 	}
+
+	public function getPermissions() {
+	    return PermissionManager::getInstance()->getPermissions();
+    }
 }

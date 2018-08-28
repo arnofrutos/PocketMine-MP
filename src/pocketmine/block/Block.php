@@ -39,7 +39,7 @@ use pocketmine\metadata\MetadataValue;
 use pocketmine\Player;
 use pocketmine\plugin\Plugin;
 
-class Block extends Position implements BlockIds, Metadatable{
+class Block extends Position implements BlockIds, Metadatable {
 
 	/**
 	 * Returns a new Block instance with the specified ID, meta and position.
@@ -765,4 +765,44 @@ class Block extends Position implements BlockIds, Metadatable{
 			$this->level->getBlockMetadata()->removeMetadata($this, $metadataKey, $owningPlugin);
 		}
 	}
+
+    /**
+     * Fires a block update on the Block from another Block
+     *
+     * @param Block $block
+     *
+     * @return void
+     */
+    public function onUpdateFromBlock(Block $block){
+    }
+
+    public function isRedstoneConductor() : bool{
+        return false;
+    }
+
+    public function getIndirectRedstonePower(Block $block, int $face, int $powerMode) : int{
+        return $this->getRedstonePower($block);
+    }
+
+    public function hasIndirectRedstonePower(Block $block, int $face, int $powerMode) : bool{
+        return $this->getIndirectRedstonePower($block, $face, $powerMode) > 0;
+    }
+
+    public function getRedstonePower(Block $block, int $powerMode = self::POWER_MODE_ALL) : int{
+        if(!$this->isRedstoneConductor()){
+            return self::REDSTONE_POWER_MIN;
+        }
+        $power = 0;
+        foreach([Vector3::SIDE_NORTH, Vector3::SIDE_EAST, Vector3::SIDE_SOUTH, Vector3::SIDE_WEST, Vector3::SIDE_DOWN, Vector3::SIDE_UP] as $face){
+            $neigh = $block->getSide($face);
+            if($neigh instanceof RedstoneSource){
+                $power = max($power, $neigh->getDirectRedstonePower($neigh, Vector3::getOppositeSide($face), $powerMode));
+            }
+        }
+        return $power;
+    }
+
+    public function hasRedstonePower(Block $block, int $powerMode = self::POWER_MODE_ALL) : bool{
+        return $this->getRedstonePower($block, $powerMode) > 0;
+    }
 }
